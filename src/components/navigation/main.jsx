@@ -11,6 +11,9 @@ export function MainMenu({ loginFlag, toggleLogin }) {
           <NavLink to="/" activeclassname="active">
             Home
           </NavLink>
+          <NavLink to="product" activeclassname="active">
+            Product
+          </NavLink>
           <NavLink to="about" activeclassname="active">
             About
           </NavLink>

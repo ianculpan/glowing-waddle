@@ -1,7 +1,7 @@
 // Home.js
 
 import React from "react";
-import { AllSkiDays } from "../data/AllSkiDays";
+import { AllProducts } from "../data/AllProducts";
 
 const Home = () => {
   return (
@@ -9,7 +9,7 @@ const Home = () => {
       <section className="Home">
         <h1>Sales Order Processing</h1>
       </section>
-      <AllSkiDays />
+      <AllProducts />
     </div>
   );
 };
