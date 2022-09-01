@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 import AddProduct from "./pages/AddProduct";
+import AllProducts from "./pages/Product";
 
 export function MainRoutes() {
   return (
@@ -14,7 +15,7 @@ export function MainRoutes() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/product" element={<Product />} />
-      <Route path="/add-product" element={<AddProduct />} />
+      {/* <Route path="/add-product" element={<AddProduct />} /> */}
     </Routes>
   );
 }

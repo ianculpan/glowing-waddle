@@ -1,7 +1,7 @@
 import React from "react";
 import { AllProducts } from "../data/AllProducts";
 import { useState } from "react";
-import AddProduct from "./AddProduct";
+import { AddProduct } from "../data/AddProduct";
 
 const Product = () => {
   let [toggleAddProduct, setToggleAddProduct] = useState(false);

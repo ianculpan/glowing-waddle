@@ -1,6 +1,7 @@
 // Home.js
 
 import React from "react";
+import { AllContacts } from "../data/AllContacts";
 import { AllProducts } from "../data/AllProducts";
 
 const Home = () => {
@@ -10,6 +11,8 @@ const Home = () => {
         <h1>Sales Order Processing</h1>
       </section>
       <AllProducts />
+      <h3> Contacts </h3>
+      <AllContacts />
     </div>
   );
 };
