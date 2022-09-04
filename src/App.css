@@ -1,124 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
-    text-align: center;
+  text-align: center;
 }
 
 .App-logo {
-    height: 40vmin;
-    pointer-events: none;
+  height: 40vmin;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App-header {
-    background-color: #282c34;
-    min-height: 10vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* font-size: calc(10px + 2vmin); */
-    color: white;
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
 }
 
 .App-content {
-    background-color: #282c34;
-    display: flex;
-    min-height: 80vh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  background-color: #282c34;
+  display: flex;
+  min-height: 80vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 .App-footer {
-    background-color: #282c34;
-    min-height: 10vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: end;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
-
 
 /* .App-link {
     color: #61dafb;
 } */
 
 @keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .nav-bar {
-    background-color: darkslategrey;
-    width: 100%;
+  background-color: darkslategrey;
+  width: 100%;
 }
 
 .nav-pages {
-    background-color: darkslategrey;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    float: left;
+  background-color: darkslategrey;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  float: left;
 }
 
 .nav-pages nav a {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: auto;
-    margin-bottom: auto;
-    text-decoration: none;
-    background-color: darkslategrey;
-    color: aliceblue;
-    float: left;
-    font-size: calc(6px + 2vmin);
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-decoration: none;
+  background-color: darkslategrey;
+  color: aliceblue;
+  float: left;
+  font-size: calc(6px + 2vmin);
 }
 
 .nav-pages nav a:hover {
-    background-color: aliceblue;
-    color: darkslategrey;
+  background-color: aliceblue;
+  color: darkslategrey;
 }
 
 .active {
-    background-color: darkslategray;
-    color: slategray;
+  background-color: darkslategray;
+  color: slategray;
 }
 
 .active:hover {
-    background-color: darkslategray;
-    color: slategray;
+  background-color: darkslategray;
+  color: slategray;
 }
 
 .nav-bar .user-menu {
-    background-color: darkslategrey;
-    width: 10%;
-    display: flex;
-    flex-direction: column;
-    float: right;
-    /* font-size: calc(10px + 2vmin); */
-    font-size: 0px;
-    border: 0px;
+  background-color: darkslategrey;
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  float: right;
+  /* font-size: calc(10px + 2vmin); */
+  font-size: 0px;
+  border: 0px;
 }
 
 .nav-bar .user-menu button {
-    background-color: darkslategray;
-    color: aliceblue;
-    font-size: calc(6px + 2vmin);
-    border-width: 0px;
-    margin: auto;
+  background-color: darkslategray;
+  color: aliceblue;
+  font-size: calc(6px + 2vmin);
+  border-width: 0px;
+  margin: auto;
 }
 
 .App-logo {
-    height: 50px;
-    float: left;
+  height: 50px;
+  float: left;
+}
+
+form label input {
+  margin: 10px;
+  background-color: darkslategray;
+  color: aliceblue;
+}
+
+.inputField {
+  margin: 10px;
+  background-color: darkslategray;
+  color: aliceblue;
+}
+
+button {
+  margin: 10px;
+  padding: 1px 20px;
+  background-color: darkslategray;
+  color: aliceblue;
+  border-radius: 0.5rem;
+}
+
+table {
+  border: 3px solid darkslategray;
+  padding: 5px;
+}
+
+tr {
+  border: 2px solid hotpink;
+  padding: 5px;
+}
+
+table td {
+  border: 2px solid darkslategray;
+  padding: 5px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  border: 3px solid darkslategray;
+  padding: 5px;
+}
+.left {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  height: 4rem;
+  border: 3px solid darkslategray;
+  padding: 5px;
+}
+
+.right {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  height: 4rem;
+  border: 3px solid darkslategray;
+  padding: 5px;
 }

@@ -33,8 +33,10 @@ export function AllContacts() {
         <ul>
           {data.getAllContacts.map((contact, index) => (
             <li key={index.toString()}>
-              {contact.contactId}, <p>Contact Name</p>
-              {contact.salutation} {contact.firstName},{contact.secondName}
+              <div className="text-xl flex-row">
+                {contact.contactId},{contact.salutation} {contact.firstName}{" "}
+                {contact.secondName}
+              </div>
             </li>
           ))}
         </ul>

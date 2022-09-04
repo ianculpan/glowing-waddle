@@ -8,28 +8,48 @@ const clearData = {
   qty: 0,
 };
 
-export function AddProduct() {
+export function AddProduct(product) {
   let [toggleForm, setToggleForm] = useState(false);
+  let [validForm, setValidForm] = useState(false);
   let [formData, setFormData] = useState(clearData);
-  // const AddProductInfo = {
-  //   productId: formData.productId,
-  //   description: formData.description,
-  //   qty: formData.qty,
-  // };
+
+  if (product?.productId?.length > 0 && product?.description?.length > 0) {
+    let [formData, setFormData] = useState(product);
+  }
 
   const [mutateFunction, { data, loading, error }] = useMutation(
     CREATE_PRODUCT,
     {
       variables: {
-        description: formData.description,
-        productId: formData.productId,
-        qty: formData.qty,
-        active: formData.active,
+        input: {
+          description: formData.description,
+          productId: formData.productId,
+          qty: Number(formData.qty),
+          active: formData.active ?? false,
+        },
+      },
+      onCompleted: (data) => {
+        console.log("completed.....", data);
+      },
+      onError: (data) => {
+        console.log(JSON.stringify(data, null, 2));
       },
     }
   );
 
+  function validateFormData() {
+    //All fields populated
+
+    return (
+      formData?.productId?.length &&
+      formData?.description?.length &&
+      formData?.qty >= 0
+    );
+  }
+
   function formDataPublish() {
+    setValidForm(validateFormData());
+    mutateFunction();
     setFormData(clearData);
     setToggleForm(!toggleForm);
   }
@@ -69,7 +89,7 @@ export function AddProduct() {
             value={formData.qty}
           />
         </label>
-        <input type="submit" value="Submit" onClick={mutateFunction} />
+        <input type="submit" value="Submit" onClick={formDataPublish} />
       </form>
     </>
   );
