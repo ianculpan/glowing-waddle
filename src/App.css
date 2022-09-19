@@ -133,9 +133,14 @@ form label input {
 }
 
 .inputField {
-  margin: 10px;
+  margin: 0px auto;
   background-color: darkslategray;
   color: aliceblue;
+  justify-content: center;
+}
+
+.inputLabel {
+  padding-right: 20px;
 }
 
 button {

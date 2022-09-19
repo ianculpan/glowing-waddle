@@ -8,20 +8,55 @@ const clearData = {
   qty: 0,
 };
 
-export function AddProduct(product) {
+export function AddProduct(props) {
   let [toggleForm, setToggleForm] = useState(false);
   let [validForm, setValidForm] = useState(false);
-  let [formData, setFormData] = useState(clearData);
+  const { formMode, product } = props;
 
-  if (product?.productId?.length > 0 && product?.description?.length > 0) {
-    let [formData, setFormData] = useState(product);
+  let init;
+
+  if (formMode === "edit" && product) {
+    init = product;
+  } else {
+    init = clearData;
+  }
+
+  let [formData, setFormData] = useState(init);
+
+  // if (product?.productId?.length > 0 && product?.description?.length > 0) {
+  //   let [formData, setFormData] = useState(product);
+  // }
+  let MUTATE_PRODUCT;
+  if (formMode === "add") {
+    MUTATE_PRODUCT = gql`
+      mutation CreateProduct($input: InputProduct!) {
+        createProduct(input: $input) {
+          productId
+          description
+          qty
+          active
+        }
+      }
+    `;
+  } else {
+    MUTATE_PRODUCT = gql`
+      mutation UpdateProduct($input: InputProduct!) {
+        updateProduct(input: $input) {
+          productId
+          description
+          qty
+          active
+        }
+      }
+    `;
   }
 
   const [mutateFunction, { data, loading, error }] = useMutation(
-    CREATE_PRODUCT,
+    MUTATE_PRODUCT,
     {
       variables: {
         input: {
+          sku: formData.sku ?? "",
           description: formData.description,
           productId: formData.productId,
           qty: Number(formData.qty),
@@ -56,52 +91,60 @@ export function AddProduct(product) {
   return (
     <>
       <form>
-        <label>
-          Product Id
-          <input
-            type="text"
-            name="productId"
-            onChange={(event) => {
-              setFormData({ ...formData, productId: event.target.value });
-            }}
-            value={formData.productId}
-          />
-        </label>
-        <label>
-          Description
-          <input
-            type="text"
-            name="description"
-            onChange={(event) => {
-              setFormData({ ...formData, description: event.target.value });
-            }}
-            value={formData.description}
-          />
-        </label>
-        <label>
-          Qty
-          <input
-            type="text"
-            name="qty"
-            onChange={(event) => {
-              setFormData({ ...formData, qty: event.target.value });
-            }}
-            value={formData.qty}
-          />
-        </label>
-        <input type="submit" value="Submit" onClick={formDataPublish} />
+        <div className="grid gap-4 grid-cols-1">
+          <div>
+            <label className="float-left inputLabel">Product SKU</label>
+            <input
+              placeholder="Generated"
+              className="float-right inputField"
+              type="text"
+              readOnly="readOnly"
+              name="sku"
+              value={formData.sku}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Product Id</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="productId"
+              onChange={(event) => {
+                setFormData({ ...formData, productId: event.target.value });
+              }}
+              value={formData.productId}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Description</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="description"
+              onChange={(event) => {
+                setFormData({ ...formData, description: event.target.value });
+              }}
+              value={formData.description}
+            />
+          </div>
+          <div classname="content-center">
+            <label className="float-left ">Qty</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="qty"
+              onChange={(event) => {
+                setFormData({ ...formData, qty: event.target.value });
+              }}
+              value={formData.qty}
+            />
+          </div>
+
+          <div className="center flex-grow">
+            <input type="submit" value="Submit" onClick={formDataPublish} />
+          </div>
+        </div>
       </form>
     </>
   );
 }
-
-const CREATE_PRODUCT = gql`
-  mutation CreateProduct($input: InputProduct!) {
-    createProduct(input: $input) {
-      productId
-      description
-      qty
-      active
-    }
-  }
-`;
