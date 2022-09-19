@@ -3,6 +3,9 @@ import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import { useState } from "react";
 import { AddProduct } from "../data/AddProduct";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 const GET_ALL_PRODUCTS = gql`
   query {
     getAllProducts {
@@ -56,6 +59,7 @@ export function AllProducts() {
                   <th></th>
                   <th>Product Id</th>
                   <th>Description</th>
+                  <th>Active</th>
                 </tr>
               </thead>
               <tbody>
@@ -85,6 +89,13 @@ export function AllProducts() {
                       </td>
                       <td> {product.productId}</td>
                       <td> {product.description}</td>
+                      <td>
+                        {product.active ? (
+                          <FontAwesomeIcon icon={faCheck} />
+                        ) : (
+                          <FontAwesomeIcon icon={faXmark} />
+                        )}
+                      </td>
                     </tr>
                   ))}
               </tbody>

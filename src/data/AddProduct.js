@@ -127,7 +127,7 @@ export function AddProduct(props) {
               value={formData.description}
             />
           </div>
-          <div classname="content-center">
+          <div className="content-center">
             <label className="float-left ">Qty</label>
             <input
               className="float-right inputField"
@@ -139,7 +139,21 @@ export function AddProduct(props) {
               value={formData.qty}
             />
           </div>
-
+          <div className="content-center">
+            <label className="float-left ">Active</label>
+            <input
+              className="float-right inputField"
+              type="checkbox"
+              name="active"
+              onChange={(event) => {
+                setFormData({
+                  ...formData,
+                  active: event.target.checked,
+                });
+              }}
+              checked={!!formData.active}
+            />
+          </div>
           <div className="center flex-grow">
             <input type="submit" value="Submit" onClick={formDataPublish} />
           </div>
