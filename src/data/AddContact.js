@@ -5,20 +5,78 @@ import gql from "graphql-tag";
 const clearData = {
   contactId: "",
   salutation: "",
-  firstName: 0,
+  firstName: "",
+  secondName: "",
+  address1: "",
+  address2: "",
+  address3: "",
+  postTown: "",
+  postCode: "",
+  county: "",
+  contactPhone: "",
+  active: "",
+  businessName: "",
 };
 
-export function AddContact() {
+export function AddContact(props) {
   let [toggleForm, setToggleForm] = useState(false);
-  let [formData, setFormData] = useState(clearData);
-  // const AddcontactInfo = {
-  //   contactId: formData.contactId,
-  //   salutation: formData.salutation,
-  //   firstName: formData.firstName,
-  // };
+  let [validForm, setValidForm] = useState(false);
+  const { formMode, contact } = props;
+
+  let init;
+
+  if (formMode === "edit" && contact) {
+    init = contact;
+  } else {
+    init = clearData;
+  }
+  let [formData, setFormData] = useState(init);
+
+  let MUTATE_CONTACT;
+  if (formMode === "add") {
+    MUTATE_CONTACT = gql`
+      mutation CreateContact($input: InputContact!) {
+        CreateContact(input: $input) {
+          contactId
+          salutation
+          firstName
+          secondName
+          businessName
+          address1
+          address2
+          address3
+          postTown
+          county
+          postCode
+          active
+          contactPhone
+        }
+      }
+    `;
+  } else {
+    MUTATE_CONTACT = gql`
+      mutation CreateContact($input: InputContact!) {
+        UpdateContact(input: $input) {
+          contactId
+          salutation
+          firstName
+          secondName
+          businessName
+          address1
+          address2
+          address3
+          postTown
+          county
+          postCode
+          active
+          contactPhone
+        }
+      }
+    `;
+  }
 
   const [mutateFunction, { data, loading, error }] = useMutation(
-    CREATE_CONTACT,
+    MUTATE_CONTACT,
     {
       variables: {
         salutation: formData.salutation,
@@ -188,23 +246,3 @@ export function AddContact() {
     </>
   );
 }
-
-const CREATE_CONTACT = gql`
-  mutation CreateContact($input: InputContact!) {
-    CreateContact(input: $input) {
-      contactId
-      salutation
-      firstName
-      secondName
-      businessName
-      address1
-      address2
-      address3
-      postTown
-      county
-      postCode
-      active
-      contactPhone
-    }
-  }
-`;
