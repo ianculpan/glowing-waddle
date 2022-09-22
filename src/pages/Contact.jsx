@@ -10,13 +10,6 @@ const Contact = () => {
     <div>
       <section className="Contact">
         <h1>This is the Contact page</h1>{" "}
-        <button
-          onClick={() => {
-            setToggleAddContact(!toggleAddContact);
-          }}
-        >
-          Add Contact
-        </button>
       </section>
 
       <AllContacts />

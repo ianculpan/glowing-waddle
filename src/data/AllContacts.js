@@ -27,6 +27,7 @@ const clearData = {
 const GET_ALL_CONTACTS = gql`
   query {
     getAllContacts {
+      guid
       contactId
       salutation
       firstName
@@ -97,6 +98,7 @@ export function AllContacts() {
                   .map((contact, index) => (
                     <tr key={index.toString()}>
                       <td>
+                        <input type="hidden" value={contact.guid}></input>
                         <button
                           onClick={() => {
                             setSelectedContact({ contact });
@@ -131,7 +133,6 @@ export function AllContacts() {
             </button>
           </>
         )}
-
         {toggleAddContact && (
           <AddContact formMode={formMode} {...selectedContact} />
         )}

@@ -35,8 +35,8 @@ export function AddContact(props) {
   let MUTATE_CONTACT;
   if (formMode === "add") {
     MUTATE_CONTACT = gql`
-      mutation CreateContact($input: InputContact!) {
-        CreateContact(input: $input) {
+      mutation createContact($input: InputContact!) {
+        createContact(input: $input) {
           contactId
           salutation
           firstName
@@ -55,8 +55,9 @@ export function AddContact(props) {
     `;
   } else {
     MUTATE_CONTACT = gql`
-      mutation CreateContact($input: InputContact!) {
-        UpdateContact(input: $input) {
+      mutation updateContact($input: InputContact!) {
+        updateContact(input: $input) {
+          guid
           contactId
           salutation
           firstName
@@ -79,19 +80,22 @@ export function AddContact(props) {
     MUTATE_CONTACT,
     {
       variables: {
-        salutation: formData.salutation,
-        contactId: formData.contactId,
-        firstName: formData.firstName,
-        active: formData.active,
-        secondName: formData.secondName,
-        businessName: formData.businessName,
-        address1: formData.address1,
-        address2: formData.address2,
-        address3: formData.address3,
-        postTown: formData.postTown,
-        county: formData.county,
-        postCode: formData.postCode,
-        contactPhone: formData.contactPhone,
+        input: {
+          guid: formData.guid,
+          salutation: formData.salutation,
+          contactId: formData.contactId,
+          firstName: formData.firstName,
+          active: formData.active,
+          secondName: formData.secondName,
+          businessName: formData.businessName,
+          address1: formData.address1,
+          address2: formData.address2,
+          address3: formData.address3,
+          postTown: formData.postTown,
+          county: formData.county,
+          postCode: formData.postCode,
+          contactPhone: formData.contactPhone,
+        },
       },
     }
   );
@@ -103,21 +107,24 @@ export function AddContact(props) {
   return (
     <>
       <form>
-        <label>
-          Contact Id
-          <input
-            type="text"
-            name="contactId"
-            onChange={(event) => {
-              setFormData({ ...formData, contactId: event.target.value });
-            }}
-            value={formData.contactId}
-          />
-        </label>
-        <div className="flex-row">
-          <label>
-            Salutation
+        <input type="hidden" value={contact?.guid}></input>
+        <div className="grid gap-4 grid-cols-1">
+          <div>
+            <label className="float-left inputLabel">Contact Id</label>
             <input
+              className="float-right inputField"
+              type="text"
+              name="contactId"
+              onChange={(event) => {
+                setFormData({ ...formData, contactId: event.target.value });
+              }}
+              value={formData.contactId}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Salutation</label>
+            <input
+              className="float-right inputField"
               type="text"
               name="salutation"
               onChange={(event) => {
@@ -125,10 +132,11 @@ export function AddContact(props) {
               }}
               value={formData.salutation}
             />
-          </label>
-          <label>
-            FirstName
+          </div>
+          <div>
+            <label className="float-left inputLabel">FirstName</label>
             <input
+              className="float-right inputField"
               type="text"
               name="firstName"
               onChange={(event) => {
@@ -136,10 +144,12 @@ export function AddContact(props) {
               }}
               value={formData.firstName}
             />
-          </label>
-          <label>
-            SecondName
+          </div>
+          <div>
+            {" "}
+            <label className="float-left inputLabel">SecondName</label>
             <input
+              className="float-right inputField"
               type="text"
               name="secondName"
               onChange={(event) => {
@@ -147,101 +157,112 @@ export function AddContact(props) {
               }}
               value={formData.secondName}
             />
-          </label>
-        </div>
-        <label>
-          Business Name
-          <input
-            type="text"
-            name="businessName"
-            onChange={(event) => {
-              setFormData({ ...formData, businessName: event.target.value });
-            }}
-            value={formData.businessName}
-          />
-        </label>
-        <div className="justify-center">
-          <div className="flex-column">
-            <label>
-              Address 1
-              <input
-                type="text"
-                name="address1"
-                onChange={(event) => {
-                  setFormData({ ...formData, address1: event.target.value });
-                }}
-                value={formData.address1}
-              />
-            </label>
-            <label>
-              Address 2
-              <input
-                type="text"
-                name="address2"
-                onChange={(event) => {
-                  setFormData({ ...formData, address2: event.target.value });
-                }}
-                value={formData.address2}
-              />
-            </label>
-            <label>
-              Address 3
-              <input
-                type="text"
-                name="address3"
-                onChange={(event) => {
-                  setFormData({ ...formData, address3: event.target.value });
-                }}
-                value={formData.address3}
-              />
-            </label>
-            <label>
-              Post Town
-              <input
-                type="text"
-                name="postTown"
-                onChange={(event) => {
-                  setFormData({ ...formData, postTown: event.target.value });
-                }}
-                value={formData.postTown}
-              />
-            </label>
-            <label>
-              Post Town
-              <input
-                type="text"
-                name="postTown"
-                onChange={(event) => {
-                  setFormData({ ...formData, postTown: event.target.value });
-                }}
-                value={formData.postTown}
-              />
-            </label>
-            <label>
-              County
-              <input
-                type="text"
-                name="county"
-                onChange={(event) => {
-                  setFormData({ ...formData, county: event.target.value });
-                }}
-                value={formData.county}
-              />
-            </label>
-            <label>
-              Post Code
-              <input
-                type="text"
-                name="postCode"
-                onChange={(event) => {
-                  setFormData({ ...formData, postCode: event.target.value });
-                }}
-                value={formData.postCode}
-              />
-            </label>
+          </div>
+
+          <div>
+            <label className="float-left inputLabel">Business Name</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="businessName"
+              onChange={(event) => {
+                setFormData({ ...formData, businessName: event.target.value });
+              }}
+              value={formData.businessName}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Address 1</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="address1"
+              onChange={(event) => {
+                setFormData({ ...formData, address1: event.target.value });
+              }}
+              value={formData.address1}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Address 2</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="address2"
+              onChange={(event) => {
+                setFormData({ ...formData, address2: event.target.value });
+              }}
+              value={formData.address2}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Address 3</label>
+            <input
+              type="text"
+              name="address3"
+              className="float-right inputField"
+              onChange={(event) => {
+                setFormData({ ...formData, address3: event.target.value });
+              }}
+              value={formData.address3}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Post Town</label>
+            <input
+              type="text"
+              name="postTown"
+              className="float-right inputField"
+              onChange={(event) => {
+                setFormData({ ...formData, postTown: event.target.value });
+              }}
+              value={formData.postTown}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">County</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="county"
+              onChange={(event) => {
+                setFormData({ ...formData, county: event.target.value });
+              }}
+              value={formData.county}
+            />
+          </div>
+          <div>
+            <label className="float-left inputLabel">Post Code</label>
+            <input
+              className="float-right inputField"
+              type="text"
+              name="postCode"
+              onChange={(event) => {
+                setFormData({ ...formData, postCode: event.target.value });
+              }}
+              value={formData.postCode}
+            />
+          </div>
+
+          <div className="content-center">
+            <label className="float-left">Active</label>
+            <input
+              className="float-right inputField"
+              type="checkbox"
+              name="active"
+              onChange={(event) => {
+                setFormData({
+                  ...formData,
+                  active: event.target.checked,
+                });
+              }}
+              checked={!!formData.active}
+            />
+          </div>
+          <div className="center flex-grow">
+            <input type="submit" value="Submit" onClick={mutateFunction} />
           </div>
         </div>
-        <input type="submit" value="Submit" onClick={mutateFunction} />
       </form>
     </>
   );
