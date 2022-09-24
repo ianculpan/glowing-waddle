@@ -93,7 +93,7 @@ export function AllContacts() {
                             .indexOf(filterData.toLowerCase()) >= 0 ||
                           contact.secondName
                             .toLowerCase()
-                            .indexOf(filterData.toLowerCase());
+                            .indexOf(filterData.toLowerCase()) >= 0;
                   })
                   .map((contact, index) => (
                     <tr key={index.toString()}>
