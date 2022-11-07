@@ -63,6 +63,7 @@ export function AllContacts() {
       }
     }
   `;
+  console.log("Selected Contact....", JSON.stringify(selectedContact));
   const [
     mutateFunction,
     { dataMutationDelete, loadingMutationDelete, errorMutationDelete },

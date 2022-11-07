@@ -118,7 +118,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, contactId: event.target.value });
               }}
-              value={formData.contactId}
+              value={formData.contactId ?? ""}
             />
           </div>
           <div>
@@ -130,7 +130,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, salutation: event.target.value });
               }}
-              value={formData.salutation}
+              value={formData.salutation ?? ""}
             />
           </div>
           <div>
@@ -142,7 +142,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, firstName: event.target.value });
               }}
-              value={formData.firstName}
+              value={formData.firstName ?? ""}
             />
           </div>
           <div>
@@ -155,7 +155,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, secondName: event.target.value });
               }}
-              value={formData.secondName}
+              value={formData.secondName ?? ""}
             />
           </div>
 
@@ -168,7 +168,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, businessName: event.target.value });
               }}
-              value={formData.businessName}
+              value={formData.businessName ?? ""}
             />
           </div>
           <div>
@@ -180,7 +180,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, address1: event.target.value });
               }}
-              value={formData.address1}
+              value={formData.address1 ?? ""}
             />
           </div>
           <div>
@@ -192,7 +192,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, address2: event.target.value });
               }}
-              value={formData.address2}
+              value={formData.address2 ?? ""}
             />
           </div>
           <div>
@@ -204,7 +204,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, address3: event.target.value });
               }}
-              value={formData.address3}
+              value={formData.address3 ?? ""}
             />
           </div>
           <div>
@@ -216,7 +216,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, postTown: event.target.value });
               }}
-              value={formData.postTown}
+              value={formData.postTown ?? ""}
             />
           </div>
           <div>
@@ -228,7 +228,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, county: event.target.value });
               }}
-              value={formData.county}
+              value={formData.county ?? ""}
             />
           </div>
           <div>
@@ -240,7 +240,7 @@ export function AddContact(props) {
               onChange={(event) => {
                 setFormData({ ...formData, postCode: event.target.value });
               }}
-              value={formData.postCode}
+              value={formData.postCode ?? ""}
             />
           </div>
 
